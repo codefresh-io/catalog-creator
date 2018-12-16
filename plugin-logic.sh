@@ -4,7 +4,7 @@
        repo=$1 
        indexPath=$2 
        masterBranch=$3
-       CF_BRANCH= $4
+       CF_BRANCH=$4
        #clean=true
          
        : ${repo:="https://github.com/codefresh-io/plugins.git"}
