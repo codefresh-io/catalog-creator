@@ -3,11 +3,17 @@
 
        repo=$1 
        indexPath=$2 
-        
+       masterBranch=$3
+       CF_BRANCH= $4
        #clean=true
          
        : ${repo:="https://github.com/codefresh-io/plugins.git"}
-     
+       : ${masterBranch:="master"}
+       : ${CF_BRANCH:=$(git branch -v | awk 'NR==1 { print $2}')}
+       echo $CF_BRANCH vs $masterBranch
+       if [ $CF_BRANCH == $masterBranch ]; then
+          exit 1
+       fi
       
        #export CF_SHORT_REVISION= CF_SHORT_REVISION || 1234
        echo git clone  of $repo
