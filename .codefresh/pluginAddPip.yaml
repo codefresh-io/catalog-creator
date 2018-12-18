@@ -1,0 +1,65 @@
+version: '1.0'
+kind: pipeline
+metadata:
+  name: codefresh-io/plugins/plugins-2
+  isPublic: false
+  labels:
+    tags: []
+  deprecate:
+    applicationPort: '8080'
+    repoPipeline: true
+  originalYamlString: |
+    version: '1.0'
+
+    stages:
+    - CreateCatalog
+
+    steps:
+      # Optional step as the pipeline will automatically checkout the connected git repo if present
+    #   MyCloneStep:
+    #     type: git-clone
+    #     title: Checking out code
+    #     repo: owner/repo
+    #     git: my-git-provider
+    #     # Connect git providers in the account settings
+    #     revision: abcdef12345
+
+      build catalog:
+        title: Build plugins catalog
+        stage: CreateCatalog
+        image: r.cfcr.io/codefresh-inc/codefresh/catalog-creator:test
+        working_directory: /plugin
+
+      # Optional step as each pipeline automatically pushes to the Codefresh internal Registry
+     
+  accountId: 5672d8deb6724b6e359adf62
+  created_at: '2018-12-16T22:33:47.645Z'
+  updated_at: '2018-12-18T21:34:17.833Z'
+  project: codefresh-io/plugins
+  id: 5c16d2cb6ecec3571e6fc9c7
+spec:
+  triggers:
+    - type: git
+      repo: codefresh-io/plugins
+      events:
+        - push.heads
+        - pullrequest
+      pullRequestAllowForkEvents: false
+      commentRegex: /.*/gi
+      branchRegex: /^((?!^master\b).)*/gi
+      modifiedFilesGlob: '!(*dynamic-catalog*)'
+      provider: github
+      context: cf_github
+  contexts: []
+  variables:
+    - key: PORT
+      value: '8080'
+  steps:
+    build catalog:
+      title: Build plugins catalog
+      stage: CreateCatalog
+      image: 'r.cfcr.io/codefresh-inc/codefresh/catalog-creator:test'
+      working_directory: /plugin
+  stages:
+    - CreateCatalog
+

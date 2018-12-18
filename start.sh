@@ -1,6 +1,5 @@
 echo on
-
 echo 'git configure'
-sh git-configure.sh  $USER_EMAIL $USERNAME $PASSWORD $CF_BRANCH
-echo 'create catalog'
-sh plugin-logic.sh
+#sh git-configure.sh  $USER_EMAIL $USERNAME $PASSWORD 
+echo 'create catalog' , current branch $CF_BRANCH
+sh plugin-logic.sh "$repo" "$indexPath" "$masterBranch"  $CF_BRANCH

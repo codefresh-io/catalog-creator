@@ -5,11 +5,16 @@
        indexPath=$2 
        masterBranch=$3
        CF_BRANCH=$4
+       echo cf branch 1=$1 2=$2 3=$3 4=$4 $CF_BRANCH ?? $4 ??
        #clean=true
-         
+       echo parameters $repo $indexPath $masterBranch $CF_BRANCH
+
        : ${repo:="https://github.com/codefresh-io/plugins.git"}
        : ${masterBranch:="master"}
-       : ${CF_BRANCH:=$(git branch -v | awk 'NR==1 { print $2}')}
+        
+        CURRENT_BRANCH=$(git branch -v | awk 'NR==1 { print $1}')
+        echo cf branch $CF_BRANCH ??
+        CF_BRANCH=${CF_BRANCH:-${CURRENT_BRANCH}}
        echo $CF_BRANCH vs $masterBranch
        if [ $CF_BRANCH == $masterBranch ]; then
           exit 1

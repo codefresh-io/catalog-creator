@@ -1,0 +1,11 @@
+ build_step:
+    title: "Building production image"
+    type: build
+    stage: build
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    image_name: codefresh/cf-api
+    on_success:
+      metadata:
+        set:
+          - '${{build_step.imageId}}':
+              - CF_QUALITY: true
