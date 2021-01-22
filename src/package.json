@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "debug": "^4.1.0",
-    "kefir": "^3.8.5",
+    "kefir": "^3.8.8",
     "lodash": "^4.17.11",
     "mustache": "^3.0.1",
     "yamljs": "^0.3.0"
